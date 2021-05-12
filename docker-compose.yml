@@ -1,0 +1,55 @@
+version: '3'
+volumes:
+  zeebe_data:
+    driver: local
+  zeebe_elasticsearch_data:
+    driver: local
+services:
+  zeebe:
+    image: camunda/zeebe
+    environment:
+    - ZEEBE_LOG_LEVEL=info
+    ports:
+    - 26500:26500
+    - 9600:9600
+    volumes:
+    - zeebe_data:/usr/local/zeebe/data
+    - ./zebee/operate/application.yaml:/usr/local/zeebe/config/application.yaml
+    depends_on:
+    - elasticsearch
+  operate:
+    image: camunda/operate
+    ports:
+    - 8080:8080
+    depends_on:
+    - zeebe
+    - elasticsearch
+    volumes:
+    - ./zebee/lib/application.yml:/usr/local/operate/config/application.yml
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.7.1
+    ports:
+    - 9200:9200
+    environment:
+    - discovery.type=single-node
+    - cluster.name=elasticsearch
+    - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+    - zeebe_elasticsearch_data:/usr/share/elasticsearch/data
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+    - 8090:8080
+    environment:
+    - SWAGGER_JSON_URL=http://localhost:9085/v3/api-docs
+  monitoring:
+    image: docker.io/library/monitoring:0.0.1-SNAPSHOT
+    ports:
+    - 9085:9085
+    environment:
+    - ZEEBE_CLUSTER_GATEWAY=zeebe:26500
+    depends_on:
+    - zeebe
+networks:
+  monitoring-with-bpmn-network:
+    driver: bridge

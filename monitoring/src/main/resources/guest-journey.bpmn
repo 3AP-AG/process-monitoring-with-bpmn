@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="Definitions_067zf0q" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.9.1">
+  <bpmn:process id="guest_journey" isExecutable="true">
+    <bpmn:startEvent id="start_event">
+      <bpmn:outgoing>Flow_0iqryxy</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0iqryxy" sourceRef="start_event" targetRef="booking_created" />
+    <bpmn:sequenceFlow id="Flow_1ss49ut" sourceRef="booking_created" targetRef="onboarding_notification_received" />
+    <bpmn:sequenceFlow id="Flow_0eqmrq6" sourceRef="onboarding_notification_received" targetRef="online_checkin_completed" />
+    <bpmn:sequenceFlow id="Flow_1i9lbs2" sourceRef="online_checkin_completed" targetRef="property_access_issued" />
+    <bpmn:sequenceFlow id="Flow_1vpneeg" sourceRef="property_access_issued" targetRef="checkout_done" />
+    <bpmn:endEvent id="end_event">
+      <bpmn:incoming>Flow_0yuzcq8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0yuzcq8" sourceRef="checkout_done" targetRef="end_event" />
+    <bpmn:receiveTask id="booking_created" name="Booking confirmed" messageRef="Message_0pa071p">
+      <bpmn:incoming>Flow_0iqryxy</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ss49ut</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:receiveTask id="onboarding_notification_received" name="Onboarding notification received" messageRef="Message_0txd1ht">
+      <bpmn:incoming>Flow_1ss49ut</bpmn:incoming>
+      <bpmn:outgoing>Flow_0eqmrq6</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:receiveTask id="online_checkin_completed" name="Online checkin completed" messageRef="Message_1q0zhlr">
+      <bpmn:incoming>Flow_0eqmrq6</bpmn:incoming>
+      <bpmn:outgoing>Flow_1i9lbs2</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:receiveTask id="property_access_issued" name="Property access issued" messageRef="Message_0nwv1xk">
+      <bpmn:incoming>Flow_1i9lbs2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vpneeg</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:receiveTask id="checkout_done" name="Checkout done" messageRef="Message_1apyqg2">
+      <bpmn:incoming>Flow_1vpneeg</bpmn:incoming>
+      <bpmn:outgoing>Flow_0yuzcq8</bpmn:outgoing>
+    </bpmn:receiveTask>
+  </bpmn:process>
+  <bpmn:message id="Message_0pa071p" name="BOOKING">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=id" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_0txd1ht" name="ONBOARDING">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=id" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_1q0zhlr" name="CHECKIN">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=id" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_0nwv1xk" name="PROPERTY_ACCESS">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=id" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_1apyqg2" name="CHECKOUT">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=id" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="guest_journey">
+      <bpmndi:BPMNEdge id="Flow_0yuzcq8_di" bpmnElement="Flow_0yuzcq8">
+        <di:waypoint x="1225" y="117" />
+        <di:waypoint x="1322" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vpneeg_di" bpmnElement="Flow_1vpneeg">
+        <di:waypoint x="1022" y="117" />
+        <di:waypoint x="1125" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i9lbs2_di" bpmnElement="Flow_1i9lbs2">
+        <di:waypoint x="819" y="117" />
+        <di:waypoint x="922" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0eqmrq6_di" bpmnElement="Flow_0eqmrq6">
+        <di:waypoint x="616" y="117" />
+        <di:waypoint x="719" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ss49ut_di" bpmnElement="Flow_1ss49ut">
+        <di:waypoint x="413" y="117" />
+        <di:waypoint x="516" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0iqryxy_di" bpmnElement="Flow_0iqryxy">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="313" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start_event">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="202" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0q5c6c9_di" bpmnElement="end_event">
+        <dc:Bounds x="1322" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16ccy3f_di" bpmnElement="booking_created">
+        <dc:Bounds x="313" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1i83rla_di" bpmnElement="onboarding_notification_received">
+        <dc:Bounds x="516" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0m284pb_di" bpmnElement="online_checkin_completed">
+        <dc:Bounds x="719" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1y5gj9p_di" bpmnElement="property_access_issued">
+        <dc:Bounds x="922" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0yf3tpr_di" bpmnElement="checkout_done">
+        <dc:Bounds x="1125" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
