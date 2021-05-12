@@ -5,8 +5,10 @@ https://engineering.3ap.ch/post/process-monitoring-with-bpmn
 
 As precondition maven and docker needs to be installed
 
+```
 mvn clean package -f ./monitoring/pom.xml
 docker-compose up
+```
 
 ## Camunda Operate
 http://localhost:8080 (admin/password)
