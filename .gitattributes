@@ -6,6 +6,9 @@
 *.jpg binary
 *.gif binary
 *.jar binary
+zbctl binary
+zbctl.darwin binary
+zbctl.exe binary
 
 # for more details see:
 # https://help.github.com/en/articles/dealing-with-line-endings

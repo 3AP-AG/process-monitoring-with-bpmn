@@ -1,0 +1,25 @@
+server:
+  port: 9085
+  forward-headers-strategy: framework
+  shutdown: graceful
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  application:
+    name: monitoring
+
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+ 
+  
+zeebe:
+  client:
+    security:
+      plaintext: true
+    broker:
+      contactPoint: ${ZEEBE_CLUSTER_GATEWAY:localhost:26500}
+      
+springdoc.api-docs.path: /v3/api-docs
