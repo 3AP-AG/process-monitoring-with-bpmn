@@ -17,6 +17,8 @@ spring:
   
 zeebe:
   client:
+    worker:
+      defaultName: default-worker
     security:
       plaintext: true
     broker:
