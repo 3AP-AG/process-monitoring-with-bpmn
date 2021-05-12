@@ -19,11 +19,11 @@ public class AlertService {
     client
         .newFailCommand(job.getKey())
         .retries(0)
-        .errorMessage("Booking notification not sent")
+        .errorMessage("Booking data incomplete")
         .send()
         .join();
 
-    log.error("Booking notification not sent for {}", job.getVariables());
+    log.error("Booking data incomplete for {}", job.getVariables());
   }
 
   @ZeebeWorker(type = MonitoringApplication.DEFAULT_WORKER)
