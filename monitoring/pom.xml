@@ -36,9 +36,9 @@
 
     <!-- zebee and camunda -->
     <dependency>
-      <groupId>io.zeebe.spring</groupId>
+      <groupId>io.camunda</groupId>
       <artifactId>spring-zeebe-starter</artifactId>
-      <version>1.0.0-rc1</version>
+      <version>1.0.0</version>
     </dependency>
 
     <!-- lombok -->
