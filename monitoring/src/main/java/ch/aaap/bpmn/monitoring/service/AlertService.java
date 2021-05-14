@@ -1,8 +1,8 @@
 package ch.aaap.bpmn.monitoring.service;
 
 import ch.aaap.bpmn.monitoring.MonitoringApplication;
-import io.zeebe.client.api.response.ActivatedJob;
-import io.zeebe.client.api.worker.JobClient;
+import io.camunda.zeebe.client.api.response.ActivatedJob;
+import io.camunda.zeebe.client.api.worker.JobClient;
 import io.zeebe.spring.client.annotation.ZeebeWorker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
