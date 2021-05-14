@@ -2,7 +2,7 @@ package ch.aaap.bpmn.monitoring.service;
 
 import ch.aaap.bpmn.monitoring.MonitoringApplication;
 import ch.aaap.bpmn.monitoring.domain.Booking;
-import io.zeebe.client.api.response.WorkflowInstanceEvent;
+import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
 import io.zeebe.spring.client.ZeebeClientLifecycle;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class StartWorkflowService {
 
   private final ZeebeClientLifecycle client;
 
-  public Mono<WorkflowInstanceEvent> start(Booking booking) {
+  public Mono<ProcessInstanceEvent> start(Booking booking) {
 
     return Mono.fromCallable(
         () -> {

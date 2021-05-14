@@ -5,8 +5,8 @@ import ch.aaap.bpmn.monitoring.domain.Message;
 import ch.aaap.bpmn.monitoring.domain.Message.MessageType;
 import ch.aaap.bpmn.monitoring.service.MessageSenderService;
 import ch.aaap.bpmn.monitoring.service.StartWorkflowService;
-import io.zeebe.client.api.response.PublishMessageResponse;
-import io.zeebe.client.api.response.WorkflowInstanceEvent;
+import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
+import io.camunda.zeebe.client.api.response.PublishMessageResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class ProcessController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Mono<WorkflowInstanceEvent> start(@RequestBody Booking booking) {
+  public Mono<ProcessInstanceEvent> start(@RequestBody Booking booking) {
     log.info("Start new guest journey workflow instance for booking {}", booking.getId());
 
     return startWorkflowService.start(booking);
