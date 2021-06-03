@@ -22,6 +22,6 @@ zeebe:
     security:
       plaintext: true
     broker:
-      contactPoint: ${ZEEBE_CLUSTER_GATEWAY:localhost:26500}
+      gateway-address: ${ZEEBE_CLUSTER_GATEWAY:localhost:26500}
       
 springdoc.api-docs.path: /v3/api-docs
